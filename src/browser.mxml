@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:anifire="anifire.*"
+			   xmlns:browser="anifire.browser.*"
+			   xmlns:bComponents="anifire.browser.components.*"
+			   minWidth="955" minHeight="600" applicationComplete="init()"
+			   viewSourceURL="srcview/index.html">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import anifire.util.UtilGettext;
+			import anifire.util.UtilDict;
+			import anifire.managers.AppConfigManager;
+			import anifire.constant.ServerConstants;
+			
+			protected function init() : void
+			{
+				this.loadLocale(this.loadLocaleComplete);
+			}
+			
+			private function loadLocale(callback:Function) : void
+			{
+				const langCode:String = AppConfigManager.instance.getValue(ServerConstants.FLASHVAR_CLIENT_THEME_LANG_CODE);
+				UtilGettext.initAggregate("browser", "go", langCode, callback);
+			}
+			
+			public function loadLocaleComplete() : void
+			{
+				this.ccBrowser.initUI();
+				scroller.addEventListener(MouseEvent.MOUSE_WHEEL, scrollHandler, true);
+			}
+			
+			protected function scrollHandler(e:MouseEvent) : void
+			{
+				e.delta = e.delta > 0 ? 4 : -4;
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+
+		global
+		{
+			modalTransparency: 0.7;
+			modalTransparencyColor: "0x000000";
+		}
+		s|Application
+		{
+			backgroundColor: #EEEEEE;
+			font-size: 13;
+		}
+		s|TextBase,
+		s|SkinnableTextBase,
+		s|RichEditableText
+		{
+			color: 5331305;
+			fontStyle: "normal";
+			fontFamily: "TrebuchetMS"
+		}
+		s|Label#promptDisplay
+		{
+			color: 13421772;
+			fontStyle: "normal";
+		}
+		
+		
+		@font-face {
+			src: url("fonts/files/trebuc.ttf");
+			font-family: TrebuchetMS;
+		}
+	</fx:Style>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+
+	<s:Scroller width="100%" height="100%" id="scroller">
+		<s:Group width="100%" height="100%" clipAndEnableScrolling="true">
+			<bComponents:CcBrowser width="960" height="1200" horizontalCenter="0" id="ccBrowser"/>
+		</s:Group>
+	</s:Scroller>	
+	
+</s:Application>
