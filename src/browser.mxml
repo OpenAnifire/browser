@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-			   xmlns:s="library://ns.adobe.com/flex/spark"
-			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   xmlns:anifire="anifire.*"
-			   xmlns:browser="anifire.browser.*"
-			   xmlns:bComponents="anifire.browser.components.*"
-			   minWidth="955" minHeight="600" applicationComplete="init()"
-			   viewSourceURL="srcview/index.html">
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:anifire="anifire.*"
+	xmlns:browser="anifire.browser.*"
+	xmlns:bComponents="anifire.browser.components.*"
+	minWidth="955"
+	minHeight="600"
+	applicationComplete="init()"
+	viewSourceURL="srcview/index.html">
+
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
 			import anifire.util.UtilGettext;
-			import anifire.util.UtilDict;
 			import anifire.managers.AppConfigManager;
 			import anifire.constant.ServerConstants;
 			
@@ -42,6 +44,7 @@
 	<fx:Style>
 		@namespace s "library://ns.adobe.com/flex/spark";
 		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace bComponents "anifire.browser.components.*";
 
 		global
 		{
@@ -57,20 +60,42 @@
 		s|SkinnableTextBase,
 		s|RichEditableText
 		{
-			color: 5331305;
+			fontLookup: embeddedCFF;
+			color: #515969;
 			fontStyle: "normal";
-			fontFamily: "TrebuchetMS"
+			fontFamily: "StudioSparkMain"
 		}
 		s|Label#promptDisplay
 		{
-			color: 13421772;
+			color: #CCCCCC;
 			fontStyle: "normal";
+		}
+		s|TextInput {
+			borderColor: #CACAD4;
+			skinClass: ClassReference("anifire.browser.skins.DefaultTextInputSkin");
+		}
+		bComponents|ArrowTipContainer {
+			skinClass: ClassReference("anifire.browser.skins.ArrowTipContainerSkin");
 		}
 		
 		
 		@font-face {
-			src: url("fonts/files/trebuc.ttf");
-			font-family: TrebuchetMS;
+			embedAsCFF: true;
+			src: url("fonts/files/Lato-Regular.ttf");
+			font-family: StudioSparkMain;
+		}
+		@font-face {
+			embedAsCFF: true;
+			src: url("fonts/files/Lato-Italic.ttf");
+			font-weight: 400;
+			font-style: italic;
+			font-family: StudioSparkMain;
+		}
+		@font-face {
+			embedAsCFF: true;
+			src: url("fonts/files/Lato-Bold.ttf");
+			font-weight: 700;
+			font-family: StudioSparkMain;
 		}
 	</fx:Style>
 
